@@ -1,0 +1,23 @@
+Assuming Day 1 is a Monday
+
+Day 1 - Sliding Window
+Day 2 - Two Pointers
+Day 3 - Fast & Slow Pointers
+Day 4 - Merge Intervals
+Day 5 - Cyclic Sort
+Day 6 - In-place Reversal of a LinkedList
+Day 7 - Tree Breadth First Search
+
+Day 8 - Tree Depth First Search
+Day 9 - Two Heaps
+Day 10 - Subsets
+Day 11 - Modified Binary Search
+Day 12 - Bitwise XOR
+Day 13 - Top 'K' Elements
+Day 14 - K-way merge
+
+Day 15 - Knapsack (Dynamic Programming)
+Day 16 - Toplogical Sort
+Day 17 - Cracking the Coding Interview
+Day 18 - Cracking the Coding Interview / LeetCode
+Day 19 - Interview Day
