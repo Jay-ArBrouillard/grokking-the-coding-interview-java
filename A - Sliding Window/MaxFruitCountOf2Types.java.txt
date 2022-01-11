@@ -1,0 +1,60 @@
+import java.util.*;
+
+class MaxFruitCountOf2Types {
+// My Attempt
+  public static int findLength(char[] arr) {
+    // Fruit=['A', 'B', 'C', 'A', 'C']
+    // windowStart = 2, windowEnd = 5, maxFruitCount = 2
+    // distinctFruit={'C' -> 2, 'A' -> 1}
+    int maxFruitCount = 0;
+    int windowStart = 0;
+    Map<Character, Integer> distinctFruit = new HashMap<>();
+    for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+      char current = arr[windowEnd];
+      // Add the fruit to the map and a count of how many we have in the current window
+      distinctFruit.put(current, distinctFruit.getOrDefault(current, 0) + 1);
+      while (distinctFruit.size() > 2) {
+        char firstChar = arr[windowStart];
+        distinctFruit.put(firstChar, distinctFruit.get(firstChar) - 1);
+        if (distinctFruit.get(firstChar) == 0) {
+          distinctFruit.remove(firstChar);
+        }
+        windowStart++;
+      }
+
+      maxFruitCount = Math.max(maxFruitCount, windowEnd - windowStart + 1);
+    }
+
+    return maxFruitCount;
+  }
+
+// Optimal Solution
+// Time Complexity: O(N+N) = O(N)
+// Space Complexity: O(1)
+  public static int findLength(char[] arr) {
+    int windowStart = 0, maxLength = 0;
+    Map<Character, Integer> fruitFrequencyMap = new HashMap<>();
+    // try to extend the range [windowStart, windowEnd]
+    for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+      fruitFrequencyMap.put(arr[windowEnd], fruitFrequencyMap.getOrDefault(arr[windowEnd], 0) + 1);
+      // shrink the sliding window, until we are left with '2' fruits in the frequency map
+      while (fruitFrequencyMap.size() > 2) {
+        fruitFrequencyMap.put(arr[windowStart], fruitFrequencyMap.get(arr[windowStart]) - 1);
+        if (fruitFrequencyMap.get(arr[windowStart]) == 0) {
+          fruitFrequencyMap.remove(arr[windowStart]);
+        }
+        windowStart++; // shrink the window
+      }
+      maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+    }
+
+    return maxLength;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("Maximum number of fruits: " + 
+                          MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'A', 'C' }));
+    System.out.println("Maximum number of fruits: " + 
+                          MaxFruitCountOf2Types.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
+  }
+}
